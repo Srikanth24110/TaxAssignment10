@@ -1,0 +1,67 @@
+package Primepro1;
+
+class InvalidNameException extends Exception{
+
+	InvalidNameException(String s){
+		super(s);
+	}
+}
+class InvalidCountryException extends Exception{
+	InvalidCountryException(String t){
+		super(t);
+	}
+}
+class InvalidTaxException extends Exception{
+	InvalidTaxException(String v){
+		super(v);
+	}
+}
+class Method {
+
+	static double vaildate(String empname,String empcountry,double salary) 
+			throws InvalidNameException,InvalidCountryException,InvalidTaxException
+	{
+		
+			if (empname==null||empname.isEmpty()) 
+			{
+				throw new InvalidNameException  ("InvalidNameException");
+			}
+			if(empcountry!="india")
+			{
+				throw new InvalidCountryException  ("InvalidCountryException");
+			} 
+			double tax=0;
+			if(salary>=100000) {
+				tax=salary*0.08;
+			}
+			else
+			if(salary>=50000 && salary<100000) {
+				tax=salary*0.07;
+			}
+			else
+			if (salary<50000 && salary>=20000) {
+				tax=salary*0.06;
+			}
+			else
+				if(salary<20000) {
+					tax=0;
+					throw new InvalidTaxException  ("InvalidTaxException");
+				}
+			return tax;
+		}
+
+
+}
+	public class Taxusingthrows {
+
+	public static void main(String[] args) throws InvalidNameException,InvalidCountryException,InvalidTaxException{
+		
+double d=Method.vaildate("sai","india",30000);
+double d2 = Method.vaildate("john", "india", 20000);
+System.out.println("Tax for john, usa, 80000: " + d2);
+
+System.out.println(d);
+		
+	}
+	}
+	
